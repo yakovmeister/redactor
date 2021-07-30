@@ -12,7 +12,9 @@ coverage
 tslint.json
 .eslintignore
 .eslintrc
-.mocharc
+.mocharc.yml
 .nycrc
 node_modules
 .github
+logo.png
+wtfpl-badge.png

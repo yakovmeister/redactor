@@ -7,6 +7,7 @@
        width="82" height="20" alt="WTFPL" /></a>
   <a href="https://codeclimate.com/github/yakovmeister/redactor/maintainability"><img src="https://api.codeclimate.com/v1/badges/4442667edb00e0b281dc/maintainability" /></a>
   <a href="https://codeclimate.com/github/yakovmeister/redactor/test_coverage"><img src="https://api.codeclimate.com/v1/badges/4442667edb00e0b281dc/test_coverage" /></a>
+  <a href="https://snyk.io/test/npm/lib-redactor"><img src="https://snyk.io/test/npm/lib-redactor/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/npm/lib-redactor" style="max-width:100%;"></a>
 </div>
 <br />
 <br />
