@@ -8,7 +8,7 @@
   "scripts": {
     "mocha": "./node_modules/.bin/mocha test/**/*.test.ts",
     "lint": "./node_modules/.bin/eslint . --ext .ts",
-    "test": "npm run lint && nyc npm run mocha",
+    "test": "npm run lint && nyc --reporter=lcov npm run mocha",
     "clean": "rimraf ./dist",
     "compile": "rollup --config rollup.config.ts --configPlugin typescript",
     "build": "npm run clean && npm run compile"
