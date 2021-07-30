@@ -1,6 +1,11 @@
-const redact = (phrase: string | number): string => {
-  if (["string", "number"].includes(typeof phrase)) {
-    return phrase.toString();
+/**
+ * Censor the given phrase
+ * @param phrase phrase to be censored
+ * @returns censored phrase
+ */
+const redact = (phrase: string | number): string | unknown => {
+  if (!["string", "number"].includes(typeof phrase)) {
+    return phrase;
   }
 
   phrase = phrase.toString();
