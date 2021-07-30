@@ -2,6 +2,31 @@ type Phrase = string | number;
 type RedactResponse = string | unknown;
 
 /**
+ * The actual function that censors the string
+ * @param phrase string to be censored
+ * @param redactorCharacter character used to replace string
+ * @returns censored phrase
+ */
+const censorString = (phrase: string, redactorCharacter: string): string => {
+  const phraseArray = phrase.split("");
+
+  const rephrasedArray = phraseArray.map((character: string, index: number) => {
+    if (phrase.length <= 3) {
+      return redactorCharacter;
+    }
+
+    if (index === 0 || index === (phrase.length - 1)) {
+      return character;
+    }
+
+    return redactorCharacter;
+  });
+
+  return rephrasedArray.join("");
+};
+
+
+/**
  * Censor the given phrase
  * @param phrase phrase to be censored
  * @returns censored phrase
@@ -15,24 +40,9 @@ export const redact = (phrase: Phrase): RedactResponse => {
     return phrase;
   }
 
-  // phrase = phrase.toString();
+  phrase = phrase.toString();
 
-  // const redactedCharacter = "█";
-  // const phraseArray = phrase.split("");
+  const redactedCharacter = "█";
 
-  // const rephrasedArray = phraseArray.map((character: string, index: number) => {
-  //   if ((phrase as string).length <= 3) {
-  //     return redactedCharacter;
-  //   }
-
-  //   if (index === 0 || index === ((phrase as string).length - 1)) {
-  //     return character;
-  //   }
-
-  //   return redactedCharacter;
-  // });
-
-  // phrase = rephrasedArray.join("");
-
-  return phrase;
+  return censorString(phrase, redactedCharacter);
 };
