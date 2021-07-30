@@ -6,6 +6,7 @@
 export const isObject = (value: unknown): boolean => {
   const isObjectType = typeof value === "object";
   const isNotEmpty = value !== null;
+  const isNotArray = !Array.isArray(value);
 
-  return isObjectType && isNotEmpty;
+  return isObjectType && isNotEmpty && isNotArray;
 };

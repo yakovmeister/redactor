@@ -15,6 +15,10 @@ const redactValues = (redactedKeys: string[], key: string, value: unknown): unkn
     newValue = redact(value);
   }
 
+  if (Array.isArray(value)) {
+    newValue = value.map((element) => redactObject(redactedKeys, element));
+  }
+
   if (isObject(value)) {
     newValue = redactObject(redactedKeys, value);
   }

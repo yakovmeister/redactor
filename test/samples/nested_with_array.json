@@ -1,0 +1,20 @@
+{
+  "names": [
+    {
+      "first": "John",
+      "last": "Doe"
+    },
+    {
+      "first": "Vogue",
+      "last": "Doe"
+    },
+    {
+      "first": "Sheldon",
+      "last": "Cooper"
+    }
+  ],
+  "address": {
+    "street": "14th Greenland, Cartimar",
+    "city": "Pasay City"
+  }
+}
