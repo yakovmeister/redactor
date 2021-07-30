@@ -1,10 +1,16 @@
+type Phrase = string | number;
+type RedactResponse = string | unknown;
+
 /**
  * Censor the given phrase
  * @param phrase phrase to be censored
  * @returns censored phrase
  */
-export const redact = (phrase: string | number): string | unknown => {
-  if (!["string", "number"].includes(typeof phrase)) {
+export const redact = (phrase: Phrase): RedactResponse => {
+  const acceptedPhraseType = ["string", "number"];
+  const phraseType = typeof phrase;
+
+  if (!acceptedPhraseType.includes(phraseType)) {
     return phrase;
   }
 
@@ -29,4 +35,3 @@ export const redact = (phrase: string | number): string | unknown => {
 
   return phrase;
 };
-
