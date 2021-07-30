@@ -1,4 +1,4 @@
-type Phrase = string | number;
+type Phrase = string | number | unknown;
 type RedactResponse = string | unknown;
 
 /**
@@ -44,5 +44,5 @@ export const redact = (phrase: Phrase): RedactResponse => {
 
   const redactedCharacter = "█";
 
-  return censorString(phrase, redactedCharacter);
+  return censorString(phrase as string, redactedCharacter);
 };
