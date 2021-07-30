@@ -10,8 +10,8 @@ export const redactObject = (redactedKeys: string[], obj: unknown) => {
   const keyvalpair = Object.entries(obj);
   const redacted = {};
 
-  for (let index = 0; index < keyvalpair.length; index++) {
-    const [key, value] = keyvalpair[index];
+  for (const pair of keyvalpair) {
+    const [key, value] = pair;
     let newValue = value;
 
     if (redactedKeys.includes(key)) {
