@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: "Install dependencies"
         run: "npm install"
-      - uses: paambaati/codeclimate-action@v2.2.4
+      - uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: d1f2dd69836b93c185330d71c91998f983ca2c34246a415e0201c42726598eb5
         with:

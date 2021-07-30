@@ -9,8 +9,9 @@ type RedactResponse = string | unknown;
 export const redact = (phrase: Phrase): RedactResponse => {
   const acceptedPhraseType = ["string", "number"];
   const phraseType = typeof phrase;
+  const phraseIsAccepted = acceptedPhraseType.includes(phraseType);
 
-  if (!acceptedPhraseType.includes(phraseType)) {
+  if (!phraseIsAccepted) {
     return phrase;
   }
 
