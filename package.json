@@ -1,6 +1,6 @@
 {
   "name": "lib-redactor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "to be added later",
   "main": "dist/index.js",
   "types": "index.d.ts",
@@ -9,11 +9,17 @@
     "mocha": "./node_modules/.bin/mocha test/**/*.test.ts",
     "lint": "./node_modules/.bin/eslint . --ext .ts",
     "test": "npm run lint && nyc --reporter=lcov npm run mocha",
+    "test:no-coverage": "npm run lint && nyc npm run mocha",
     "clean": "rimraf ./dist",
     "compile": "rollup --config rollup.config.ts --configPlugin typescript",
     "build": "npm run clean && npm run compile"
   },
-  "keywords": [],
+  "keywords": [
+    "mask text",
+    "mask",
+    "redactor",
+    "redact text"
+  ],
   "license": "WTFPL",
   "repository": {
     "type": "git",

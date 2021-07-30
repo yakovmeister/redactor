@@ -1,0 +1,10 @@
+{
+  "name": {
+    "first": "John",
+    "last": "Doe"
+  },
+  "address": {
+    "street": "14th Greenland, Cartimar",
+    "city": "Pasay City"
+  }
+}

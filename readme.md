@@ -42,8 +42,5 @@ console.log(redacted);
 ///   "email": "j██████████████████m"
 /// }
 ```  
-## To do  
-  
-* nested object support
 ## License  
 lib-redactor is [WTFPL licensed](LICENSE).

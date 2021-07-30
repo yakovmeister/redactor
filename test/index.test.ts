@@ -2,9 +2,11 @@ import redact from "@src/index";
 import * as basic from "./samples/basic.json";
 import * as basic2 from "./samples/basic_with_numerical_values.json";
 import * as basic3 from "./samples/basic_with_nested.json";
+import * as nested from "./samples/nested.json";
 import Basic from "./samples/basic.type";
 import BasicWithNumericalValue from "./samples/basic_with_numerical_values.type";
 import BasicWithNested from "./samples/basic_with_nested.type";
+import Nested from "./samples/nested.type";
 import { expect } from "chai";
 
 describe("redactor", () => {
@@ -51,5 +53,23 @@ describe("redactor", () => {
     expect(redacted.birthday).to.be.equal("January 1, 1991");
     expect(redacted.address).not.to.be.a("string");
     expect(redacted.address).to.have.haveOwnProperty("street");
+  });
+
+  it("should redact nested properties", async () => {
+    const redactRule = redact([
+      "first",
+      "city"
+    ]);
+
+    const redacted: Nested = redactRule(nested);
+
+    expect(redacted.name).to.haveOwnProperty("first");
+    expect(redacted.name.first).to.be.equal("J██n");
+    expect(redacted.name).to.haveOwnProperty("first");
+    expect(redacted.name.last).to.be.equal("Doe");
+    expect(redacted.address).to.have.haveOwnProperty("street");
+    expect(redacted.address.street).to.be.equal("14th Greenland, Cartimar");
+    expect(redacted.address).to.haveOwnProperty("city");
+    expect(redacted.address.city).to.be.equal("P████████y");
   });
 });

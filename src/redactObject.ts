@@ -1,4 +1,5 @@
 import { redact } from "@src/redact";
+import { isObject } from "@src/isObject";
 
 /**
  * Loop through each key-value pair and censor specific based on the given key
@@ -19,6 +20,10 @@ export const redactObject = (redactedKeys: string[], obj: unknown) => {
     }
 
     redacted[key] = newValue;
+
+    if (isObject(value)) {
+      redacted[key] = redactObject(redactedKeys, value);
+    }
   }
 
   return redacted;
