@@ -1,0 +1,40 @@
+{
+  "name": "redactor",
+  "version": "1.0.0",
+  "description": "to be added later",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Jacob Baring <so@tfwno.gf>",
+  "scripts": {
+    "mocha": "./node_modules/.bin/mocha test/**/*.test.ts",
+    "lint": "./node_modules/.bin/eslint . --ext .ts",
+    "test": "npm run lint && nyc npm run mocha",
+    "compile": "rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "keywords": [],
+  "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yakovmeister.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yakovmeister/redactor/issues"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.4",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.4.7",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "chai": "^4.3.4",
+    "eslint": "^7.31.0",
+    "mocha": "^9.0.3",
+    "nyc": "^15.1.0",
+    "rollup": "^2.55.1",
+    "ts-node": "^10.1.0",
+    "tsconfig-paths": "^3.10.1",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
+  }
+}
