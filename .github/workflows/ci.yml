@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 12.x
+          - 14.x
+          - 15.x
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setting up node ${{ matrix.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Downloading codeclimate reporter
+        run: "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
+      - run: "chmod +x ./cc-test-reporter"
+      - run: "./cc-test-reporter before-build"
+      - name: Install latest npm
+        run: "npm install -g npm@latest"
+      - name: "Install dependencies"
+        run: "npm install"
+      - name: "Run test"
+        run: "npm run test"
+      - name: "Recording results"
+        run: "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"

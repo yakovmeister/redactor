@@ -1,15 +1,17 @@
 {
   "name": "redactor",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "to be added later",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "author": "Jacob Baring <so@tfwno.gf>",
   "scripts": {
     "mocha": "./node_modules/.bin/mocha test/**/*.test.ts",
     "lint": "./node_modules/.bin/eslint . --ext .ts",
     "test": "npm run lint && nyc npm run mocha",
-    "compile": "rollup --config rollup.config.ts --configPlugin typescript"
+    "clean": "rimraf ./dist",
+    "compile": "rollup --config rollup.config.ts --configPlugin typescript",
+    "build": "npm run clean && npm run compile"
   },
   "keywords": [],
   "license": "WTFPL",
@@ -31,7 +33,9 @@
     "eslint": "^7.31.0",
     "mocha": "^9.0.3",
     "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.55.1",
+    "rollup-plugin-terser": "^7.0.2",
     "ts-node": "^10.1.0",
     "tsconfig-paths": "^3.10.1",
     "tslib": "^2.3.0",

@@ -3,7 +3,7 @@
  * @param phrase phrase to be censored
  * @returns censored phrase
  */
-const redact = (phrase: string | number): string | unknown => {
+export const redact = (phrase: string | number): string | unknown => {
   if (!["string", "number"].includes(typeof phrase)) {
     return phrase;
   }
@@ -30,4 +30,3 @@ const redact = (phrase: string | number): string | unknown => {
   return phrase;
 };
 
-export default redact;

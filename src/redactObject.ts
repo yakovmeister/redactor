@@ -1,4 +1,4 @@
-import redact from "@src/redact";
+import { redact } from "@src/redact";
 
 /**
  * Loop through each key-value pair and censor specific based on the given key
@@ -6,7 +6,7 @@ import redact from "@src/redact";
  * @param obj key-value pair with redactable values
  * @returns key-value pair with redacted values
  */
-const redactObject = (redactedKeys: string[], obj: unknown) => {
+export const redactObject = (redactedKeys: string[], obj: unknown) => {
   const keyvalpair = Object.entries(obj);
   const redacted = {};
 
@@ -23,5 +23,3 @@ const redactObject = (redactedKeys: string[], obj: unknown) => {
 
   return redacted;
 };
-
-export default redactObject;

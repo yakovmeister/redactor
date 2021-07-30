@@ -1,4 +1,4 @@
-import redactObject from "@src/redactObject";
+import { redactObject } from "@src/redactObject";
 
 export * as redact from "@src/redact";
 
