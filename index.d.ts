@@ -6,6 +6,7 @@ export type RedactResponse = string | unknown;
 
 export type RedactorOption = {
   maskCharacter?: string;
+  blacklistedWords: (string | RegExp)[];
   fullRedaction?: boolean;
 };
 

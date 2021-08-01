@@ -1,6 +1,7 @@
 import { redact } from "@src/redact";
 import { isObject } from "@src/isObject";
 import { RedactorOption } from "@src/index";
+import { searchAndCensor } from "@src/censor";
 
 type RedactValuesParam = {
   redactedKeys?: string[];
@@ -30,6 +31,10 @@ const redactValues = (param: RedactValuesParam, options: RedactorOption): unknow
 
   if (redactedKeys.includes(key)) {
     newValue = redact(value, options);
+  }
+
+  if (options.blacklistedWords.length) {
+    newValue = searchAndCensor(value as string, options.blacklistedWords, options);
   }
 
   return newValue;

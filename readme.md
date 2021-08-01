@@ -72,5 +72,36 @@ console.log(redacted);
 ///   "email": "jXXXXXXXXXXXXXXXXXXm"
 /// }
 ```  
+### Redacting based on supplied keywords or basic pattern  
+  
+```typescript
+import redactor from "lib-redactor";
+  
+
+const redactMe = {
+  phrase: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}
+;
+const options = {
+  maskCharacter: "X",
+  fullRedaction: true,
+  blacklistedWords: [
+    /Lorem/g,
+    "elit",
+    "non",
+    "dolor"
+  ]
+};
+const redactionRule = redactor([], options);
+
+const redacted = redactionRule(redactMe);
+
+console.log(redacted);
+/// will log the following:
+/// {
+///   "phrase_full": "XXXXX ipsum XXXXX sit amet, consectetur adipiscing XXXX, sed do eiusmod tempor incididunt ut labore et XXXXXe magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure XXXXX in reprehenderit in voluptate vXXXX esse cillum XXXXXe eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat XXX proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+/// }
+
+```  
 ## License  
 lib-redactor is [WTFPL licensed](LICENSE).

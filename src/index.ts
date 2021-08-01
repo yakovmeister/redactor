@@ -7,11 +7,12 @@ export type RedactorFunction = (obj: unknown) => unknown;
 export type RedactorOption = {
   maskCharacter?: string;
   fullRedaction?: boolean;
-  censorPattern?: string[] | RegExp[];
+  blacklistedWords?: (string | RegExp)[];
 };
 
 const defaultRedactorOption = {
   maskCharacter: "█",
+  blacklistedWords: [],
   fullRedaction: false
 };
 

@@ -4,11 +4,14 @@ import * as basic2 from "./samples/basic_with_numerical_values.json";
 import * as basic3 from "./samples/basic_with_nested.json";
 import * as nested from "./samples/nested.json";
 import * as nested2 from "./samples/nested_with_array.json";
+import * as complex from "./samples/complex.json";
+import * as complexExpected from "./samples/complex_expected.json";
 import Basic from "./samples/basic.type";
 import BasicWithNumericalValue from "./samples/basic_with_numerical_values.type";
 import BasicWithNested from "./samples/basic_with_nested.type";
 import Nested from "./samples/nested.type";
 import NestedWithArray from "./samples/nested_with_array.type";
+import Complex from "./samples/complex.type";
 import { expect } from "chai";
 
 describe("redactor", () => {
@@ -134,5 +137,60 @@ describe("redactor", () => {
     expect(redacted.country).to.be.equal("PH");
     expect(redacted.last_name).to.be.equal("XXX");
     expect(redacted.birthday).to.be.equal("XXXXXXXXXXXXXXX");
+  });
+
+  it("should redact words from blocklist", async () => {
+    const options = {
+      maskCharacter: "X",
+      blacklistedWords: [
+        "Lorem",
+        "elit",
+        "non",
+        "dolor"
+      ]
+    };
+    const redactRule = redact([], options);
+
+    const redacted: Complex = redactRule(complex);
+
+    expect(redacted).to.haveOwnProperty("phrase");
+    expect(redacted.phrase).to.be.equal(complexExpected.phrase);
+  });
+
+  it("should redact simple pattern from blocklist", async () => {
+    const options = {
+      maskCharacter: "X",
+      blacklistedWords: [
+        /Lorem/g,
+        "elit",
+        "non",
+        "dolor"
+      ]
+    };
+    const redactRule = redact([], options);
+
+    const redacted: Complex = redactRule(complex);
+
+    expect(redacted).to.haveOwnProperty("phrase");
+    expect(redacted.phrase).to.be.equal(complexExpected.phrase);
+  });
+
+  it("should redact words from blocklist (full redaction)", async () => {
+    const options = {
+      maskCharacter: "X",
+      fullRedaction: true,
+      blacklistedWords: [
+        /Lorem/g,
+        "elit",
+        "non",
+        "dolor"
+      ]
+    };
+    const redactRule = redact([], options);
+
+    const redacted: Complex = redactRule(complex);
+
+    expect(redacted).to.haveOwnProperty("phrase");
+    expect(redacted.phrase).to.be.equal(complexExpected.phrase_full);
   });
 });
