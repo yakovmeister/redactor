@@ -7,6 +7,7 @@ export type RedactorFunction = (obj: unknown) => unknown;
 export type RedactorOption = {
   maskCharacter?: string;
   fullRedaction?: boolean;
+  censorPattern?: string[] | RegExp[];
 };
 
 const defaultRedactorOption = {

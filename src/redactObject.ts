@@ -20,16 +20,16 @@ const redactValues = (param: RedactValuesParam, options: RedactorOption): unknow
 
   let newValue = value;
 
-  if (redactedKeys.includes(key)) {
-    newValue = redact(value, options);
-  }
-
   if (Array.isArray(value)) {
     newValue = value.map((element) => redactObject(redactedKeys, element, options));
   }
 
   if (isObject(value)) {
     newValue = redactObject(redactedKeys, value, options);
+  }
+
+  if (redactedKeys.includes(key)) {
+    newValue = redact(value, options);
   }
 
   return newValue;

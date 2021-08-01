@@ -5,13 +5,13 @@
  * @returns censored phrase
  */
 export const censorStringFull = (phrase: string, redactorCharacter: string): string => {
-  const phraseArray = phrase.split("");
+  const pattern = /.*/;
 
-  const rephrasedArray = phraseArray.map(() => {
-    return redactorCharacter;
-  });
+  const replacerFunction = (str: string): string => {
+    return "".padStart(str.length, redactorCharacter);
+  };
 
-  return rephrasedArray.join("");
+  return phrase.replace(pattern, replacerFunction);
 };
 
 /**
@@ -21,19 +21,17 @@ export const censorStringFull = (phrase: string, redactorCharacter: string): str
  * @returns censored phrase
  */
 export const censorString = (phrase: string, redactorCharacter: string): string => {
-  const phraseArray = phrase.split("");
+  const pattern = /(.)(.*)(.)/;
 
-  const rephrasedArray = phraseArray.map((character: string, index: number) => {
-    if (phrase.length <= 3) {
-      return redactorCharacter;
-    }
+  const replacerFunction = (str: string, str2: string, str3: string, str4: string): string => {
+    const masked =  "".padStart(str3.length, redactorCharacter);
 
-    if (index === 0 || index === (phrase.length - 1)) {
-      return character;
-    }
+    return `${str2}${masked}${str4}`;
+  };
 
-    return redactorCharacter;
-  });
+  if (phrase.length <= 3) {
+    return censorStringFull(phrase, redactorCharacter);
+  }
 
-  return rephrasedArray.join("");
+  return phrase.replace(pattern, replacerFunction);
 };
