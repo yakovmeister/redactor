@@ -1,5 +1,12 @@
 import { redact } from "@src/redact";
 import { isObject } from "@src/isObject";
+import { RedactorOption } from "@src/index";
+
+type RedactValuesParam = {
+  redactedKeys?: string[];
+  key?: string;
+  value?: unknown;
+};
 
 /**
  * Recursively attempt to redact values
@@ -8,19 +15,21 @@ import { isObject } from "@src/isObject";
  * @param value object property value
  * @returns redacted values
  */
-const redactValues = (redactedKeys: string[], key: string, value: unknown): unknown => {
+const redactValues = (param: RedactValuesParam, options: RedactorOption): unknown => {
+  const { redactedKeys, key, value } = param;
+
   let newValue = value;
 
   if (redactedKeys.includes(key)) {
-    newValue = redact(value);
+    newValue = redact(value, options);
   }
 
   if (Array.isArray(value)) {
-    newValue = value.map((element) => redactObject(redactedKeys, element));
+    newValue = value.map((element) => redactObject(redactedKeys, element, options));
   }
 
   if (isObject(value)) {
-    newValue = redactObject(redactedKeys, value);
+    newValue = redactObject(redactedKeys, value, options);
   }
 
   return newValue;
@@ -32,14 +41,18 @@ const redactValues = (redactedKeys: string[], key: string, value: unknown): unkn
  * @param obj key-value pair with redactable values
  * @returns key-value pair with redacted values
  */
-export const redactObject = (redactedKeys: string[], obj: unknown) => {
+export const redactObject = (redactedKeys: string[], obj: unknown, options: RedactorOption) => {
   const keyvalpair = Object.entries(obj);
   const redacted = {};
 
   for (const pair of keyvalpair) {
     const [key, value] = pair;
 
-    redacted[key] = redactValues(redactedKeys, key, value);
+    redacted[key] = redactValues({
+      redactedKeys,
+      key,
+      value
+    }, options);
   }
 
   return redacted;

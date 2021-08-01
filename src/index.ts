@@ -4,8 +4,23 @@ export * as redact from "@src/redact";
 
 export type RedactorFunction = (obj: unknown) => unknown;
 
-export default (redactedKeys: string[]): RedactorFunction => {
+export type RedactorOption = {
+  maskCharacter?: string;
+  fullRedaction?: boolean;
+};
+
+const defaultRedactorOption = {
+  maskCharacter: "█",
+  fullRedaction: false
+};
+
+export default (redactedKeys: string[], options: RedactorOption = {}): RedactorFunction => {
+  options = {
+    ...defaultRedactorOption,
+    ...options
+  };
+
   return (obj: unknown): unknown => {
-    return redactObject(redactedKeys, obj);
+    return redactObject(redactedKeys, obj, options);
   };
 };

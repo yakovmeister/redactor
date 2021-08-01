@@ -1,6 +1,6 @@
 {
   "name": "lib-redactor",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "to be added later",
   "main": "dist/index.js",
   "types": "index.d.ts",
@@ -23,7 +23,7 @@
   "license": "WTFPL",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yakovmeister.git"
+    "url": "https://github.com/yakovmeister/redactor"
   },
   "bugs": {
     "url": "https://github.com/yakovmeister/redactor/issues"

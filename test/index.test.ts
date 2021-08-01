@@ -100,4 +100,39 @@ describe("redactor", () => {
     expect(redacted.address).to.haveOwnProperty("city");
     expect(redacted.address.city).to.be.equal("P████████y");
   });
+
+  it("should fully redact basic plain string key pair", async () => {
+    const options = {
+      fullRedaction: true
+    };
+    const redactRule = redact([
+      "last_name",
+      "birthday"
+    ], options);
+
+    const redacted: Basic = redactRule(basic);
+
+    expect(redacted.first_name).to.be.equal("John");
+    expect(redacted.country).to.be.equal("PH");
+    expect(redacted.last_name).to.be.equal("███");
+    expect(redacted.birthday).to.be.equal("███████████████");
+  });
+
+  it("should change redactor character", async () => {
+    const options = {
+      maskCharacter: "X",
+      fullRedaction: true
+    };
+    const redactRule = redact([
+      "last_name",
+      "birthday"
+    ], options);
+
+    const redacted: Basic = redactRule(basic);
+
+    expect(redacted.first_name).to.be.equal("John");
+    expect(redacted.country).to.be.equal("PH");
+    expect(redacted.last_name).to.be.equal("XXX");
+    expect(redacted.birthday).to.be.equal("XXXXXXXXXXXXXXX");
+  });
 });
