@@ -63,12 +63,12 @@ const convertToExpression = (str: string): RegExp => {
 export const searchAndCensor = (phrase: string, searchPatterns: (string | RegExp)[], options: RedactorOption): string => {
   const censorFunction = options.fullRedaction ? censorStringFull : censorString;
   for (let pattern of searchPatterns) {
-		pattern = convertToExpression(pattern as string);
+    pattern = convertToExpression(pattern as string);
 
-		phrase = phrase.replace(pattern, (str) => {
-			return censorFunction(str, options.maskCharacter);
-		});
-	}
+    phrase = phrase.replace(pattern, (str) => {
+      return censorFunction(str, options.maskCharacter);
+    });
+  }
 
   return phrase;
 };

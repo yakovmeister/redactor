@@ -18,5 +18,5 @@ export type RedactorOption = {
 declare const redact: (phrase: Phrase, options: RedactorOption) => RedactResponse;
 export { redact };
 
-declare const redactor: (redactedKeys: string[], options: RedactorOption) => RedactorFunction;
+declare const redactor: (redactedKeys: string[], options?: RedactorOption) => RedactorFunction;
 export default redactor;

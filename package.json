@@ -1,6 +1,6 @@
 {
   "name": "lib-redactor",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Another library that will help you ██████ texts with ease.",
   "main": "dist/index.js",
   "types": "index.d.ts",
