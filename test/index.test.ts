@@ -4,6 +4,7 @@ import * as basic2 from "./samples/basic_with_numerical_values.json";
 import * as basic3 from "./samples/basic_with_nested.json";
 import * as nested from "./samples/nested.json";
 import * as nested2 from "./samples/nested_with_array.json";
+import * as nested3 from "./samples/nested_with_array2.json";
 import * as complex from "./samples/complex.json";
 import * as complexExpected from "./samples/complex_expected.json";
 import Basic from "./samples/basic.type";
@@ -11,6 +12,7 @@ import BasicWithNumericalValue from "./samples/basic_with_numerical_values.type"
 import BasicWithNested from "./samples/basic_with_nested.type";
 import Nested from "./samples/nested.type";
 import NestedWithArray from "./samples/nested_with_array.type";
+import NestedWithArray2 from "./samples/nested_with_array2.type";
 import Complex from "./samples/complex.type";
 import { expect } from "chai";
 
@@ -98,6 +100,27 @@ describe("redactor", () => {
     expect(redacted.names[2].first).to.be.equal("S█████n");
     expect(redacted.names[2]).to.haveOwnProperty("last");
     expect(redacted.names[2].last).to.be.equal("Cooper");
+    expect(redacted.address).to.have.haveOwnProperty("street");
+    expect(redacted.address.street).to.be.equal("14th Greenland, Cartimar");
+    expect(redacted.address).to.haveOwnProperty("city");
+    expect(redacted.address.city).to.be.equal("P████████y");
+  });
+
+  it("should redact nested strings from array", async () => {
+    const redactRule = redact([
+      "phones",
+      "city"
+    ]);
+
+    const redacted: NestedWithArray2 = redactRule(nested3);
+
+    expect(redacted.names[0]).to.be.equal("John Doe");
+    expect(redacted.names[1]).to.be.equal("David Goth");
+    expect(redacted.names[2]).to.be.equal("Mike Neri");
+    expect(redacted.phones[0]).to.be.equal("+█████████0");
+    expect(redacted.phones[1]).to.be.equal("8███████1");
+    expect(redacted.phones[2]).to.be.equal("9█████████9");
+    expect(redacted.phones[3]).to.be.true;
     expect(redacted.address).to.have.haveOwnProperty("street");
     expect(redacted.address.street).to.be.equal("14th Greenland, Cartimar");
     expect(redacted.address).to.haveOwnProperty("city");

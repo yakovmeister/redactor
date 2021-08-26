@@ -1,0 +1,17 @@
+{
+  "names": [
+    "John Doe",
+    "David Goth",
+    "Mike Neri"
+  ],
+  "phones": [
+    "+4700000000",
+    "812399911",
+    98090909069,
+    true
+  ],
+  "address": {
+    "street": "14th Greenland, Cartimar",
+    "city": "Pasay City"
+  }
+}

@@ -11,33 +11,59 @@ type RedactValuesParam = {
 
 /**
  * Recursively attempt to redact values
- * @param redactedKeys keys of which values are to be redacted
- * @param key object property name
- * @param value object property value
+ * @param param.redactedKeys keys of which values are to be redacted
+ * @param param.key object property name
+ * @param param.value object property value
+ * @param options RedactorOption
  * @returns redacted values
  */
 const redactValues = (param: RedactValuesParam, options: RedactorOption): unknown => {
   const { redactedKeys, key, value } = param;
 
-  let newValue = value;
-
   if (Array.isArray(value)) {
-    newValue = value.map((element) => redactObject(redactedKeys, element, options));
+    return value.map((element) => redactArrayValues({
+      redactedKeys,
+      key,
+      value: element
+    }, options));
   }
 
   if (isObject(value)) {
-    newValue = redactObject(redactedKeys, value, options);
+    return redactObject(redactedKeys, value, options);
   }
 
   if (redactedKeys.includes(key)) {
-    newValue = redact(value, options);
+    return redact(value, options);
   }
 
   if (options.blacklistedWords.length) {
-    newValue = searchAndCensor(value as string, options.blacklistedWords, options);
+    return searchAndCensor(value as string, options.blacklistedWords, options);
   }
 
-  return newValue;
+  return value;
+};
+
+/**
+ * Redact values from array... need to refactor everything.
+ * @param param.redactedKeys keys of which values are to be redacted
+ * @param param.key object property name
+ * @param param.value object property value
+ * @param options RedactorOption
+ * @returns superman
+ */
+const redactArrayValues = (param: RedactValuesParam, options: RedactorOption) => {
+  const { redactedKeys, key, value } = param;
+  const flatValues = ["string", "number", "boolean"];
+
+  if (!flatValues.includes(typeof value)) {
+    return redactObject(redactedKeys, value, options);
+  }
+
+  if (flatValues.includes(typeof value) && redactedKeys.includes(key)) {
+    return redact(value, options);
+  }
+
+  return value;
 };
 
 /**

@@ -1,7 +1,7 @@
 import { RedactorOption } from "@src/index";
 import { censorStringFull, censorString } from "@src/censor";
 
-type Phrase = string | number | unknown;
+type Phrase = unknown;
 type RedactResponse = string | unknown;
 
 /**
