@@ -121,6 +121,8 @@ describe("redactor", () => {
     expect(redacted.phones[1]).to.be.equal("8███████1");
     expect(redacted.phones[2]).to.be.equal("9█████████9");
     expect(redacted.phones[3]).to.be.true;
+    expect(redacted.phones[4]).to.have.haveOwnProperty("first");
+    expect((redacted.phones[4] as { first?: string  }).first).to.be.equal("John");
     expect(redacted.address).to.have.haveOwnProperty("street");
     expect(redacted.address.street).to.be.equal("14th Greenland, Cartimar");
     expect(redacted.address).to.haveOwnProperty("city");
